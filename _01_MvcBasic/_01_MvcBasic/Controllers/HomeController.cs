@@ -43,7 +43,6 @@ namespace _01_MvcBasic.Controllers
             var customer = CustomerContext.Customers.Find(x => x.Id == id);
             CustomerContext.Customers.Remove(customer);
 
-
             return RedirectToAction("Index");
         }
 
