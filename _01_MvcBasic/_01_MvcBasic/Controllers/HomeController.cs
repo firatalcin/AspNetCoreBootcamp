@@ -67,5 +67,10 @@ namespace _01_MvcBasic.Controllers
             return RedirectToAction("Index");
 
         }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
     }
 }
