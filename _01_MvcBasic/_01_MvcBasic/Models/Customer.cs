@@ -1,4 +1,6 @@
-﻿namespace MvcBasic.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MvcBasic.Models
 {
     public class Customer
     {

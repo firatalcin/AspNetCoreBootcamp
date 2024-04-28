@@ -11,6 +11,8 @@ namespace _01_MvcBasic
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddSession();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -21,10 +23,18 @@ namespace _01_MvcBasic
                 app.UseHsts();
             }
 
+            app.UseExceptionHandler("/Home/Error");
+
+            app.UseStatusCodePagesWithReExecute("/Home/Status", "?code={0}");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            
+
             app.UseRouting();
+            app.UseSession();
+
             //app.UseMiddleware<ResponseEditingMiddleware>();
             //app.UseMiddleware<RequestEditingMiddleware>();
 

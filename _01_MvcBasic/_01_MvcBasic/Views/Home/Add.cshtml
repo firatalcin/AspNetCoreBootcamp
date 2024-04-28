@@ -1,0 +1,37 @@
+﻿@model CustomerCreateModel
+
+
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body>
+    <div class="container">
+        <h3>Create Customer</h3>
+
+        <form asp-controller="Home" asp-action="Add" method="post">
+            <div class="form-group">
+                <label>Customer Name: <span asp-validation-for="@Model.FirstName" class="text-danger"></span> </label>
+                <input asp-for="FirstName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Customer Last Name:</label>
+                <input asp-for="LastName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Age:</label>
+                <input asp-for="Age" class="form-control" />
+            </div>
+            <div class="form-group text-right">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+
+            <div asp-validation-summary="All" class="text-danger">
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
