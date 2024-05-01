@@ -1,0 +1,29 @@
+﻿@inject EFCore.Dependency.Services.IScopedService _scopedService;
+@inject EFCore.Dependency.Services.ISingletonService _singletonService;
+@inject EFCore.Dependency.Services.ITransientService _transientService;
+
+<style>
+    .box {
+        height: 200px;
+        background: gray;
+        margin: 20px;
+    }
+</style>
+
+
+<div class="box">
+    <h6>Singleton</h6>
+    <p>@ViewBag.Singleton</p>
+    <p>@_singletonService.GuidId</p>
+</div>
+<div class="box">
+    <h6>Scoped</h6>
+    <p>@ViewBag.Scoped</p>
+    <p>@_scopedService.GuidId</p>
+</div>
+<div class="box">
+    <h6>Transient</h6>
+    <p>@ViewBag.Transient</p>
+    <p>@_transientService.GuidId</p>
+</div>
+
