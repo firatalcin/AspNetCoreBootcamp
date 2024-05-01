@@ -1,0 +1,23 @@
+﻿@model SelectList
+@{
+    ViewData["Title"] = "SendMoney";
+}
+
+<div class="mt-3">
+    <form action="/" method="post" class="w-75 mx-auto">
+        <input type="text" name="SenderId" value="@ViewBag.SenderId" />
+        <div class="mb-3">
+            <label>Göndereceğiniz Hesap Numarası</label>
+            <select asp-items="@Model" class="form-select" name="AccountId">
+            </select>
+        </div>
+        <div class="mb-3">
+            <label></label>
+            <input type="number" name="Amount" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Para Gönder</button>
+        </div>
+    </form>
+</div>
+
