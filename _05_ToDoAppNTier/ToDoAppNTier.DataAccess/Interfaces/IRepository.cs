@@ -15,5 +15,6 @@ namespace ToDoAppNTier.DataAccess.Interfaces
         Task Create(T entity);
         void Update(T entity);
         void Remove(T entity);
+        IQueryable<T> GetQuery();
     }
 }

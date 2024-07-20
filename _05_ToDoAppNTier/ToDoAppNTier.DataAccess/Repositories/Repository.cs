@@ -44,6 +44,11 @@ namespace ToDoAppNTier.DataAccess.Repositories
             return await _context.Set<T>().FindAsync(id);
         }
 
+        public IQueryable<T> GetQuery()
+        {
+            return _context.Set<T>().AsQueryable(); 
+        }
+
         public void Remove(T entity)
         {
             _context.Set<T>().Remove(entity);
