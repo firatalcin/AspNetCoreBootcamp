@@ -1,4 +1,7 @@
+using ToDoAppNTier.Business.DependencyResolvers.Microsoft;
+
 namespace ToDoAppNTier.Web
+
 {
     public class Program
     {
@@ -8,6 +11,7 @@ namespace ToDoAppNTier.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDependencies();
 
             var app = builder.Build();
 
