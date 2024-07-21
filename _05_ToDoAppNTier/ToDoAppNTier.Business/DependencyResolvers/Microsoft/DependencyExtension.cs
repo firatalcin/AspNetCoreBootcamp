@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using ToDoAppNTier.Business.Interfaces;
+using ToDoAppNTier.Business.Services;
 using ToDoAppNTier.DataAccess.Contexts;
+using ToDoAppNTier.DataAccess.UnitOfWork;
 
 namespace ToDoAppNTier.Business.DependencyResolvers.Microsoft
 {
@@ -12,6 +15,9 @@ namespace ToDoAppNTier.Business.DependencyResolvers.Microsoft
             {
                 opt.UseSqlServer("server=MAKINA\\SQLEXPRESS01; database= ToDoDb; integrated security=true;TrustServerCertificate=True");
             });
+
+            services.AddScoped<IUow, Uow>();
+            services.AddScoped<IWorkService, WorkService>();
         }
     }
 }
