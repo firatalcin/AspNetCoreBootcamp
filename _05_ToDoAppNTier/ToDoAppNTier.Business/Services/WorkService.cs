@@ -19,6 +19,17 @@ namespace ToDoAppNTier.Business.Services
             _uow = uow;
         }
 
+        public async Task Create(WorkCreateDto dto)
+        {
+            await _uow.GetRepository<Work>().Create(new Work
+            {
+                Definition = dto.Definition,
+                IsCompleted = dto.IsCompleted
+            });
+
+            await _uow.SaveChangesAsync();
+        }
+
         public async Task<List<WorkListDto>> GetAll()
         {
             var list = await _uow.GetRepository<Work>().GetAll();
