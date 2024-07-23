@@ -34,7 +34,7 @@ namespace ToDoAppNTier.Business.Services
         {
             var list = await _uow.GetRepository<Work>().GetAll();
             List<WorkListDto> workList = new List<WorkListDto>();
-            if (list == null && list.Count > 0)
+            if (list != null && list.Count > 0)
             {
                 foreach (var item in list)
                 {

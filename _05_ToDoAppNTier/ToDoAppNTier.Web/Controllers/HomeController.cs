@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using ToDoAppNTier.Business.Interfaces;
 using ToDoAppNTier.Web.Models;
 
 namespace ToDoAppNTier.Web.Controllers
@@ -7,15 +8,18 @@ namespace ToDoAppNTier.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IWorkService _workService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IWorkService workService , ILogger<HomeController> logger)
         {
+            _workService = workService;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var workList = await _workService.GetAll();
+            return View(workList);
         }
 
         public IActionResult Privacy()
