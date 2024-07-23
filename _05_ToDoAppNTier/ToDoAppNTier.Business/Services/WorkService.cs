@@ -34,7 +34,7 @@ namespace ToDoAppNTier.Business.Services
         {
             var list = await _uow.GetRepository<Work>().GetAll();
             List<WorkListDto> workList = new List<WorkListDto>();
-            if (list == null && list.Count > 0) 
+            if (list == null && list.Count > 0)
             {
                 foreach (var item in list)
                 {
@@ -65,6 +65,18 @@ namespace ToDoAppNTier.Business.Services
         {
             var deletedWork = await _uow.GetRepository<Work>().GetById(id);
             _uow.GetRepository<Work>().Remove(deletedWork);
+            await _uow.SaveChangesAsync();
+        }
+
+        public async Task Update(WorkUpdateDto dto)
+        {
+            _uow.GetRepository<Work>().Update(
+               new()
+               {
+                   Id = dto.Id,
+                   Definition = dto.Definition,
+                   IsCompleted = dto.IsCompleted
+               });
             await _uow.SaveChangesAsync();
         }
     }
