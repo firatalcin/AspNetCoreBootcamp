@@ -50,5 +50,15 @@ namespace ToDoAppNTier.Business.Services
             }
             return null;
         }
+
+        public async Task<WorkListDto> GetById(object id)
+        {
+            var work = await _uow.GetRepository<Work>().GetById(id);
+            return new()
+            {
+                Definition = work.Definition,
+                IsCompleted = work.IsCompleted
+            };
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace ToDoAppNTier.DataAccess.Repositories
                 await _context.Set<T>().FirstOrDefaultAsync(filter);
         }
 
-        public async Task<T> GetById(int id)
+        public async Task<T> GetById(object id)
         {
             return await _context.Set<T>().FindAsync(id);
         }

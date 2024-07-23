@@ -10,7 +10,7 @@ namespace ToDoAppNTier.DataAccess.Interfaces
     public interface IRepository<T> where T : class, new()
     {
         Task<List<T>> GetAll(Expression<Func<T, bool>> filter=null);
-        Task<T> GetById(int id);
+        Task<T> GetById(object id);
         Task<T> GetByFilter(Expression<Func<T, bool>> filter, bool asNoTracking = false);
         Task Create(T entity);
         void Update(T entity);
