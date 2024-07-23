@@ -60,5 +60,12 @@ namespace ToDoAppNTier.Business.Services
                 IsCompleted = work.IsCompleted
             };
         }
+
+        public async Task Remove(object id)
+        {
+            var deletedWork = await _uow.GetRepository<Work>().GetById(id);
+            _uow.GetRepository<Work>().Remove(deletedWork);
+            await _uow.SaveChangesAsync();
+        }
     }
 }
