@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ToDoAppNTier.Business.Interfaces;
+using ToDoAppNTier.Dtos.WorkDtos;
 using ToDoAppNTier.Web.Models;
 
 namespace ToDoAppNTier.Web.Controllers
@@ -22,6 +23,22 @@ namespace ToDoAppNTier.Web.Controllers
             return View(workList);
         }
 
+        public IActionResult Create()
+        {
+            return View(new WorkCreateDto());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(WorkCreateDto request)
+        {
+            if(ModelState.IsValid)
+            {
+                await _workService.Create(request);
+                return RedirectToAction("Index");
+            }
+
+            return View(request);
+        }
         public IActionResult Privacy()
         {
             return View();
