@@ -15,7 +15,6 @@ namespace ToDoAppNTier.DataAccess.Contexts
         {
             modelBuilder.ApplyConfiguration(new WorkConfiguration());
         }
-
         public DbSet<Work> Works { get; set; }
     }
 }

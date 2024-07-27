@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ToDoAppNTier.DataAccess.Contexts;
 using ToDoAppNTier.DataAccess.Interfaces;
+using ToDoAppNTier.Entities.Concrete;
 
 namespace ToDoAppNTier.DataAccess.Repositories
 {
-    internal class Repository<T> : IRepository<T> where T : class, new()
+    internal class Repository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly ToDoContext _context;
 
@@ -56,7 +57,9 @@ namespace ToDoAppNTier.DataAccess.Repositories
 
         public void Update(T entity)
         {
-            _context.Set<T>().Update(entity);
+            var updatedEntity = _context.Set<T>().Find(entity.Id);
+            _context.Entry(updatedEntity).CurrentValues.SetValues(entity);
+            //_context.Set<T>().Update(entity);
         }
 
        

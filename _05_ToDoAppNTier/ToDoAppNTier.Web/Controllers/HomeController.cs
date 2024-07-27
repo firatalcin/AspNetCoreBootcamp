@@ -39,6 +39,29 @@ namespace ToDoAppNTier.Web.Controllers
 
             return View(request);
         }
+
+        public async Task<IActionResult> Update(int id)
+        {
+            var dto = await _workService.GetById(id);
+            return View(new WorkUpdateDto
+            {
+                Id = dto.Id,
+                Definition = dto.Definition,
+                IsCompleted = dto.IsCompleted
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(WorkUpdateDto request)
+        {
+            if (ModelState.IsValid) 
+            {
+                await _workService.Update(request);
+                return RedirectToAction("Index");
+            }
+            return View(request);
+        }
+
         public IActionResult Privacy()
         {
             return View();

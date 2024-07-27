@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ToDoAppNTier.DataAccess.Contexts;
 using ToDoAppNTier.DataAccess.Interfaces;
 using ToDoAppNTier.DataAccess.Repositories;
+using ToDoAppNTier.Entities.Concrete;
 
 namespace ToDoAppNTier.DataAccess.UnitOfWork
 {
@@ -18,7 +19,7 @@ namespace ToDoAppNTier.DataAccess.UnitOfWork
             _context = context;
         }
 
-        public IRepository<T> GetRepository<T>() where T : class, new()
+        public IRepository<T> GetRepository<T>() where T : BaseEntity
         {
             return new Repository<T>(_context);
         }

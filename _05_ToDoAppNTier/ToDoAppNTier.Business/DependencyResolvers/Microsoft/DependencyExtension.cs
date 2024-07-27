@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using ToDoAppNTier.Business.Interfaces;
 using ToDoAppNTier.Business.Services;
 using ToDoAppNTier.DataAccess.Contexts;
@@ -14,6 +15,7 @@ namespace ToDoAppNTier.Business.DependencyResolvers.Microsoft
             services.AddDbContext<ToDoContext>(opt =>
             {
                 opt.UseSqlServer("server=MAKINA\\SQLEXPRESS01; database= ToDoDb; integrated security=true;TrustServerCertificate=True");
+                opt.LogTo(Console.WriteLine, LogLevel.Information);
             });
 
             services.AddScoped<IUow, Uow>();
