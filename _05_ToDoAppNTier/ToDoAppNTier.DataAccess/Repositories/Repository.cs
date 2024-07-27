@@ -50,9 +50,10 @@ namespace ToDoAppNTier.DataAccess.Repositories
             return _context.Set<T>().AsQueryable(); 
         }
 
-        public void Remove(T entity)
+        public void Remove(object id)
         {
-            _context.Set<T>().Remove(entity);
+            var deletedEntity = _context.Set<T>().Find(id);
+            _context.Set<T>().Remove(deletedEntity);
         }
 
         public void Update(T entity)

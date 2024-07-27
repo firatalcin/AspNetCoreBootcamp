@@ -62,6 +62,12 @@ namespace ToDoAppNTier.Web.Controllers
             return View(request);
         }
 
+        public async Task<IActionResult> Remove(int id)
+        {
+            await _workService.Remove(id);
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Privacy()
         {
             return View();
