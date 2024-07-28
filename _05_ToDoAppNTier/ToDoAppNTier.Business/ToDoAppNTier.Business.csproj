@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ToDoAppNTier.DataAccess\ToDoAppNTier.DataAccess.csproj" />
     <ProjectReference Include="..\ToDoAppNTier.Dtos\ToDoAppNTier.Dtos.csproj" />
   </ItemGroup>
