@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ToDoAppNTier.Business.Interfaces;
 using ToDoAppNTier.DataAccess.UnitOfWork;
+using ToDoAppNTier.Dtos.Interfaces;
 using ToDoAppNTier.Dtos.WorkDtos;
 using ToDoAppNTier.Entities.Concrete;
 
@@ -34,9 +35,9 @@ namespace ToDoAppNTier.Business.Services
             return  _mapper.Map<List<WorkListDto>>(await _uow.GetRepository<Work>().GetAll());
         }
 
-        public async Task<WorkListDto> GetById(int id)
+        public async Task<IDto> GetById<IDto>(int id)
         {
-            return _mapper.Map<WorkListDto>(await _uow.GetRepository<Work>().GetByFilter(x => x.Id == id, true));
+            return _mapper.Map<IDto>(await _uow.GetRepository<Work>().GetByFilter(x => x.Id == id, true));
             
         }
 

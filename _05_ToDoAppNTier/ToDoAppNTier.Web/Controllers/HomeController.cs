@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ToDoAppNTier.Business.Interfaces;
+using ToDoAppNTier.Dtos.Interfaces;
 using ToDoAppNTier.Dtos.WorkDtos;
 using ToDoAppNTier.Web.Models;
 
@@ -42,13 +43,7 @@ namespace ToDoAppNTier.Web.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
-            var dto = await _workService.GetById(id);
-            return View(new WorkUpdateDto
-            {
-                Id = dto.Id,
-                Definition = dto.Definition,
-                IsCompleted = dto.IsCompleted
-            });
+            return View(await _workService.GetById<WorkUpdateDto>(id));
         }
 
         [HttpPost]
