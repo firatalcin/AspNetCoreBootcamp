@@ -32,13 +32,8 @@ namespace ToDoAppNTier.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(WorkCreateDto request)
         {
-            if(ModelState.IsValid)
-            {
-                await _workService.Create(request);
-                return RedirectToAction("Index");
-            }
-
-            return View(request);
+            await _workService.Create(request);
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Update(int id)
@@ -49,12 +44,8 @@ namespace ToDoAppNTier.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(WorkUpdateDto request)
         {
-            if (ModelState.IsValid) 
-            {
-                await _workService.Update(request);
-                return RedirectToAction("Index");
-            }
-            return View(request);
+            await _workService.Update(request);
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Remove(int id)

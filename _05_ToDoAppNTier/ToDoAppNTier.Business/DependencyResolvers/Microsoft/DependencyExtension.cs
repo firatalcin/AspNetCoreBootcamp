@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ToDoAppNTier.Business.Interfaces;
 using ToDoAppNTier.Business.Mappings.AutoMapper;
 using ToDoAppNTier.Business.Services;
+using ToDoAppNTier.Business.ValidationRules;
 using ToDoAppNTier.DataAccess.Contexts;
 using ToDoAppNTier.DataAccess.UnitOfWork;
+using ToDoAppNTier.Dtos.WorkDtos;
 
 namespace ToDoAppNTier.Business.DependencyResolvers.Microsoft
 {
@@ -26,6 +29,9 @@ namespace ToDoAppNTier.Business.DependencyResolvers.Microsoft
             });
 
             var mapper = configuration.CreateMapper();
+
+            services.AddTransient<IValidator<WorkCreateDto>, WorkCreateDtoValidator>();
+            services.AddTransient<IValidator<WorkUpdateDto>, WorkUpdateDtoValidator>();
 
             services.AddSingleton(mapper);
 
