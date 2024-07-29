@@ -52,7 +52,12 @@ namespace ToDoAppNTier.Business.Services
 
         public async Task Remove(int id)
         {
-            _uow.GetRepository<Work>().Remove(id);
+            var removedEntity = await _uow.GetRepository<Work>().GetByFilter(x => x.Id == id, true);
+            if(removedEntity != null)
+            {
+                _uow.GetRepository<Work>().Remove(removedEntity);
+                await _uow.SaveChangesAsync();
+            }
             await _uow.SaveChangesAsync();
         }
 
@@ -61,10 +66,13 @@ namespace ToDoAppNTier.Business.Services
             var validationResult = _updateDtovalidator.Validate(dto);
             if (validationResult.IsValid)
             {
-                _uow.GetRepository<Work>().Update(_mapper.Map<Work>(dto));
-                await _uow.SaveChangesAsync();
+                var updatedEntity = await _uow.GetRepository<Work>().Find(dto.Id);
+                if (updatedEntity != null) 
+                {
+                    _uow.GetRepository<Work>().Update(_mapper.Map<Work>(dto), updatedEntity);
+                    await _uow.SaveChangesAsync();
+                }            
             }
-
         }
     }
 }

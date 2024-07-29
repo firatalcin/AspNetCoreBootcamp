@@ -40,7 +40,7 @@ namespace ToDoAppNTier.DataAccess.Repositories
                 await _context.Set<T>().FirstOrDefaultAsync(filter);
         }
 
-        public async Task<T> GetById(object id)
+        public async Task<T> Find(object id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
@@ -50,19 +50,14 @@ namespace ToDoAppNTier.DataAccess.Repositories
             return _context.Set<T>().AsQueryable(); 
         }
 
-        public void Remove(object id)
-        {
-            var deletedEntity = _context.Set<T>().Find(id);
-            _context.Set<T>().Remove(deletedEntity);
+        public void Remove(T entity)
+        {            
+            _context.Set<T>().Remove(entity);
         }
 
-        public void Update(T entity)
+        public void Update(T entity, T unchanged)
         {
-            var updatedEntity = _context.Set<T>().Find(entity.Id);
-            _context.Entry(updatedEntity).CurrentValues.SetValues(entity);
-            //_context.Set<T>().Update(entity);
-        }
-
-       
+            _context.Entry(unchanged).CurrentValues.SetValues(entity);
+        }      
     }
 }
