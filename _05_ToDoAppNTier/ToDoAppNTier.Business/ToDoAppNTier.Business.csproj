@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ToDoAppNTier.Common\ToDoAppNTier.Common.csproj" />
     <ProjectReference Include="..\ToDoAppNTier.DataAccess\ToDoAppNTier.DataAccess.csproj" />
     <ProjectReference Include="..\ToDoAppNTier.Dtos\ToDoAppNTier.Dtos.csproj" />
   </ItemGroup>
