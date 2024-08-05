@@ -1,3 +1,6 @@
+using _06_IdentityProject.Web.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace _06_IdentityProject.Web
 {
     public class Program
@@ -8,6 +11,11 @@ namespace _06_IdentityProject.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<AppDbContext>(opt =>
+            {
+                opt.UseSqlServer("server=MAKINA\\SQLEXPRESS01; database= IdentityDb2; integrated security=true;TrustServerCertificate=True");
+            });
 
             var app = builder.Build();
 
