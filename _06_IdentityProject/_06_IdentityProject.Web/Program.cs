@@ -1,4 +1,5 @@
 using _06_IdentityProject.Web.Contexts;
+using _06_IdentityProject.Web.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace _06_IdentityProject.Web
@@ -16,6 +17,8 @@ namespace _06_IdentityProject.Web
             {
                 opt.UseSqlServer("server=MAKINA\\SQLEXPRESS01; database= IdentityDb2; integrated security=true;TrustServerCertificate=True");
             });
+
+            builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>();
 
             var app = builder.Build();
 
