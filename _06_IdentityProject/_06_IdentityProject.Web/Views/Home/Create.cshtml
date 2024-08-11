@@ -1,0 +1,39 @@
+﻿@model UserCreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form asp-action="Create" asp-controller="Home" method="post" class="p-4 w-75 mx-auto shadow">
+    <div class="mb-3">
+        <label>Kullanıcı Adı</label>
+        <span class="text-danger" asp-validation-for="@Model.Username"></span>
+        <input asp-for="Username" class="form-control"/>        
+    </div>
+    <div class="mb-3">
+        <label>Şifre</label>
+        <span class="text-danger" asp-validation-for="@Model.Password"></span>
+        <input asp-for="Password" type="password" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Şifre Tekrar</label>
+        <span class="text-danger" asp-validation-for="@Model.ConfirmPassword"></span>
+        <input asp-for="ConfirmPassword" type="password" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Email</label>
+        <span class="text-danger" asp-validation-for="@Model.Email"></span>
+        <input asp-for="Email" type="email" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Cinsiyet</label>
+        <span class="text-danger" asp-validation-for="@Model.Gender"></span>
+        <input asp-for="Gender" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+    </div>
+
+    <div class="text-danger mt-2" asp-validation-summary="ModelOnly"></div>
+</form>
+

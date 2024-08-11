@@ -18,7 +18,14 @@ namespace _06_IdentityProject.Web
                 opt.UseSqlServer("server=MAKINA\\SQLEXPRESS01; database= IdentityDb2; integrated security=true;TrustServerCertificate=True");
             });
 
-            builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>();
+            builder.Services.AddIdentity<AppUser, AppRole>(opt =>
+            {
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredLength = 1;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
+            }).AddEntityFrameworkStores<AppDbContext>();
 
             var app = builder.Build();
 
