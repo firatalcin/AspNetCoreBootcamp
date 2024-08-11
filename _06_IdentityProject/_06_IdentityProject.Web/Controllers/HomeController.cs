@@ -83,7 +83,7 @@ namespace _06_IdentityProject.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var signInResult = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, true);
+                var signInResult = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
 
                 if (signInResult.Succeeded)
                 {
@@ -136,6 +136,12 @@ namespace _06_IdentityProject.Web.Controllers
         public IActionResult MemberPage()
         {
             return View();
+        }
+
+        public async Task<IActionResult> SignOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index");
         }
 
 

@@ -18,6 +18,10 @@
         <span class="text-danger" asp-validation-for="@Model.Password"></span>
         <input asp-for="Password" type="password" class="form-control" />
     </div>   
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" asp-for="@Model.RememberMe"/>
+        <label class="form-check-label" for="RememberMe">Beni Hatırla</label>
+    </div>
     <div class="mb-3">
         <button type="submit" class="btn btn-primary">Giriş Yap</button>
     </div>

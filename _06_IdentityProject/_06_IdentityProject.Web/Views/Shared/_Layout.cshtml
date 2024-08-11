@@ -19,16 +19,26 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Create">Kayıt Ol</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark"  asp-controller="Home" asp-action="SignIn">Giriş Yap</a>
-                        </li>
+                       
                         @if(User != null && User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Home" asp-action="GetUserInfo">Kullanıcı Bilgileri</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="SignOut">Çıkış Yap</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Create">Kayıt Ol</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="SignIn">Giriş Yap</a>
                             </li>
                         }
                     </ul>
