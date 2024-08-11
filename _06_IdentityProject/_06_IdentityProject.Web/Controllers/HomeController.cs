@@ -10,11 +10,13 @@ namespace _06_IdentityProject.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<AppUser> userManager)
+        public HomeController(ILogger<HomeController> logger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _logger = logger;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -51,6 +53,33 @@ namespace _06_IdentityProject.Web.Controllers
             return View(model);
         }
 
+        public IActionResult SignIn()
+        {
+            return View(); 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SignIn(UserSignInModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var signInResult = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, true);
+
+                if (signInResult.Succeeded)
+                {
+
+                }
+                else if (signInResult.IsLockedOut)
+                {
+
+                }
+                else if (signInResult.IsNotAllowed)
+                {
+
+                }
+            }
+            return View(model);
+        }
         public IActionResult Privacy()
         {
             return View();
