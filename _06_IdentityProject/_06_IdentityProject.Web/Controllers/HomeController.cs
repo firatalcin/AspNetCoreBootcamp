@@ -29,7 +29,7 @@ namespace _06_IdentityProject.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create() 
+        public IActionResult Create()
         {
             return View(new UserCreateModel());
         }
@@ -46,14 +46,14 @@ namespace _06_IdentityProject.Web.Controllers
                     ImagePath = ""
                 };
 
-                
+
 
                 var identityResult = await _userManager.CreateAsync(appUser, model.Password);
-                if (identityResult.Succeeded) 
+                if (identityResult.Succeeded)
                 {
                     var memberRole = await _roleManager.FindByNameAsync("Member");
 
-                    if(memberRole == null)
+                    if (memberRole == null)
                     {
                         await _roleManager.CreateAsync(new()
                         {
@@ -75,7 +75,7 @@ namespace _06_IdentityProject.Web.Controllers
 
         public IActionResult SignIn(string returnUrl)
         {
-            return View(new UserSignInModel() { ReturnUrl = returnUrl}); 
+            return View(new UserSignInModel() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
@@ -101,18 +101,18 @@ namespace _06_IdentityProject.Web.Controllers
                     else
                     {
                         return RedirectToAction("Panel");
-                    }                   
+                    }
                 }
-                else if(signInResult.IsLockedOut)
+                else if (signInResult.IsLockedOut)
                 {
                     var lockOutEnd = await _userManager.GetLockoutEndDateAsync(user);
-                    ModelState.AddModelError("", $"Hesabınız {(lockOutEnd.Value.UtcDateTime - DateTime.UtcNow).Minutes} dakika askıya alınmıştır.")
+                    ModelState.AddModelError("", $"Hesabınız {(lockOutEnd.Value.UtcDateTime - DateTime.UtcNow).Minutes} dakika askıya alınmıştır.");
                 }
                 else
                 {
                     var message = string.Empty;
-                    
-                    if (user != null) 
+
+                    if (user != null)
                     {
                         var failedCount = await _userManager.GetAccessFailedCountAsync(user);
                         message = $"{_userManager.Options.Lockout.MaxFailedAccessAttempts - failedCount} kez daha girerseniz hesabınız geçici olarak kilitlenecektir.";
@@ -127,7 +127,7 @@ namespace _06_IdentityProject.Web.Controllers
             return View(model);
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetUserInfo()
         {
             var username = User.Identity.Name;
@@ -136,7 +136,7 @@ namespace _06_IdentityProject.Web.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult AdminPanel() 
+        public IActionResult AdminPanel()
         {
             return View();
         }
@@ -157,6 +157,11 @@ namespace _06_IdentityProject.Web.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index");
+        }
+
+        public IActionResult AccessDenied() 
+        {
+            return View(); 
         }
 
 

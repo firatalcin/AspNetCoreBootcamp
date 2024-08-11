@@ -40,6 +40,7 @@ namespace _06_IdentityProject.Web
                 opt.Cookie.Name = "UdemyCookie";
                 opt.ExpireTimeSpan = TimeSpan.FromDays(25);
                 opt.LoginPath = new PathString("/Home/SignIn");
+                opt.AccessDeniedPath = new PathString("/Home/AccessDenied");
             });
 
             var app = builder.Build();
