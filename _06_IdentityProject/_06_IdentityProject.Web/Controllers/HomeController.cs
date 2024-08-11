@@ -83,8 +83,8 @@ namespace _06_IdentityProject.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var signInResult = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
-
+                var signInResult = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, true);
+                var user = await _userManager.FindByNameAsync(model.Username);
                 if (signInResult.Succeeded)
                 {
 
@@ -93,7 +93,6 @@ namespace _06_IdentityProject.Web.Controllers
                         return Redirect(model.ReturnUrl);
                     }
 
-                    var user = await _userManager.FindByNameAsync(model.Username);
                     var roles = await _userManager.GetRolesAsync(user);
                     if (roles.Contains("Admin"))
                     {
@@ -104,9 +103,25 @@ namespace _06_IdentityProject.Web.Controllers
                         return RedirectToAction("Panel");
                     }                   
                 }
+                else if(signInResult.IsLockedOut)
+                {
+                    var lockOutEnd = await _userManager.GetLockoutEndDateAsync(user);
+                    ModelState.AddModelError("", $"Hesabınız {(lockOutEnd.Value.UtcDateTime - DateTime.UtcNow).Minutes} dakika askıya alınmıştır.")
+                }
                 else
                 {
-                    ModelState.AddModelError("", "Kullanıcı adı veya şifre hatalı");
+                    var message = string.Empty;
+                    
+                    if (user != null) 
+                    {
+                        var failedCount = await _userManager.GetAccessFailedCountAsync(user);
+                        message = $"{_userManager.Options.Lockout.MaxFailedAccessAttempts - failedCount} kez daha girerseniz hesabınız geçici olarak kilitlenecektir.";
+                    }
+                    else
+                    {
+                        message = "Kullanıcı adı veya şifre hatalı";
+                    }
+                    ModelState.AddModelError("", message);
                 }
             }
             return View(model);

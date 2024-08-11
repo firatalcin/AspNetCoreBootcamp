@@ -26,6 +26,7 @@ namespace _06_IdentityProject.Web
                 opt.Password.RequireLowercase = false;
                 opt.Password.RequireUppercase = false;
                 opt.Password.RequireNonAlphanumeric = false;
+                opt.Lockout.MaxFailedAccessAttempts = 3;
                 //opt.SignIn.RequireConfirmedEmail = true;
             })  
                 //.AddErrorDescriber<CustomErrorDescriber>()
