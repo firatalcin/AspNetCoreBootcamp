@@ -51,12 +51,18 @@ namespace _06_IdentityProject.Web.Controllers
                 var identityResult = await _userManager.CreateAsync(appUser, model.Password);
                 if (identityResult.Succeeded) 
                 {
-                    await _roleManager.CreateAsync(new AppRole
+                    var memberRole = await _roleManager.FindByNameAsync("Member");
+
+                    if(memberRole == null)
                     {
-                        Name = "Admin",
-                        CreatedDate = DateTime.Now,
-                    });
-                    await _userManager.AddToRoleAsync(appUser, "Admin");
+                        await _roleManager.CreateAsync(new()
+                        {
+                            Name = "Member",
+                            CreatedDate = DateTime.Now,
+                        });
+                    }
+
+                    await _userManager.AddToRoleAsync(appUser, "Member");
                     return RedirectToAction("Index");
                 }
                 foreach (var error in identityResult.Errors)
@@ -67,9 +73,9 @@ namespace _06_IdentityProject.Web.Controllers
             return View(model);
         }
 
-        public IActionResult SignIn()
+        public IActionResult SignIn(string returnUrl)
         {
-            return View(); 
+            return View(new UserSignInModel() { ReturnUrl = returnUrl}); 
         }
 
         [HttpPost]
@@ -81,27 +87,58 @@ namespace _06_IdentityProject.Web.Controllers
 
                 if (signInResult.Succeeded)
                 {
-                    return RedirectToAction("Index");
-                }
-                else if (signInResult.IsLockedOut)
-                {
 
-                }
-                else if (signInResult.IsNotAllowed)
-                {
+                    if (!string.IsNullOrWhiteSpace(model.ReturnUrl))
+                    {
+                        return Redirect(model.ReturnUrl);
+                    }
 
+                    var user = await _userManager.FindByNameAsync(model.Username);
+                    var roles = await _userManager.GetRolesAsync(user);
+                    if (roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("AdminPanel");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Panel");
+                    }                   
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Kullanıcı adı veya şifre hatalı");
                 }
             }
             return View(model);
         }
 
-        [Authorize]
+        [Authorize(Roles ="Admin")]
         public IActionResult GetUserInfo()
         {
             var username = User.Identity.Name;
             var role = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value;
             return View();
         }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult AdminPanel() 
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Member")]
+        public IActionResult Panel()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Member")]
+        public IActionResult MemberPage()
+        {
+            return View();
+        }
+
+
         public IActionResult Privacy()
         {
             return View();

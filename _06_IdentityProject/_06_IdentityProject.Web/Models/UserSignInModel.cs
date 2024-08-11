@@ -8,5 +8,6 @@ namespace _06_IdentityProject.Web.Models
         public string Username { get; set; }
         [Required(ErrorMessage = "Parola gereklidir.")]
         public string Password { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

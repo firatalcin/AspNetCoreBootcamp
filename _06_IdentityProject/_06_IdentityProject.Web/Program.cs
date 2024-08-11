@@ -28,6 +28,16 @@ namespace _06_IdentityProject.Web
                 //opt.SignIn.RequireConfirmedEmail = true;
             }).AddEntityFrameworkStores<AppDbContext>();
 
+            builder.Services.ConfigureApplicationCookie(opt =>
+            {
+                opt.Cookie.HttpOnly = true;
+                opt.Cookie.SameSite = SameSiteMode.Strict;
+                opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                opt.Cookie.Name = "UdemyCookie";
+                opt.ExpireTimeSpan = TimeSpan.FromDays(25);
+                opt.LoginPath = new PathString("/Home/SignIn");
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
