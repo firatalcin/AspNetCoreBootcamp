@@ -1,4 +1,5 @@
 using _06_IdentityProject.Web.Contexts;
+using _06_IdentityProject.Web.CustomDescriber;
 using _06_IdentityProject.Web.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +27,9 @@ namespace _06_IdentityProject.Web
                 opt.Password.RequireUppercase = false;
                 opt.Password.RequireNonAlphanumeric = false;
                 //opt.SignIn.RequireConfirmedEmail = true;
-            }).AddEntityFrameworkStores<AppDbContext>();
+            })  
+                //.AddErrorDescriber<CustomErrorDescriber>()
+                .AddEntityFrameworkStores<AppDbContext>();
 
             builder.Services.ConfigureApplicationCookie(opt =>
             {
