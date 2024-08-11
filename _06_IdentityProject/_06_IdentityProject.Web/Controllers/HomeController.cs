@@ -1,8 +1,10 @@
 using _06_IdentityProject.Web.Entities;
 using _06_IdentityProject.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace _06_IdentityProject.Web.Controllers
 {
@@ -11,12 +13,14 @@ namespace _06_IdentityProject.Web.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly RoleManager<AppRole> _roleManager;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public HomeController(ILogger<HomeController> logger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager)
         {
             _logger = logger;
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         public IActionResult Index()
@@ -38,11 +42,21 @@ namespace _06_IdentityProject.Web.Controllers
                 {
                     Email = model.Email,
                     Gender = model.Gender,
-                    UserName = model.Username
+                    UserName = model.Username,
+                    ImagePath = ""
                 };
+
+                
+
                 var identityResult = await _userManager.CreateAsync(appUser, model.Password);
                 if (identityResult.Succeeded) 
                 {
+                    await _roleManager.CreateAsync(new AppRole
+                    {
+                        Name = "Admin",
+                        CreatedDate = DateTime.Now,
+                    });
+                    await _userManager.AddToRoleAsync(appUser, "Admin");
                     return RedirectToAction("Index");
                 }
                 foreach (var error in identityResult.Errors)
@@ -67,7 +81,7 @@ namespace _06_IdentityProject.Web.Controllers
 
                 if (signInResult.Succeeded)
                 {
-
+                    return RedirectToAction("Index");
                 }
                 else if (signInResult.IsLockedOut)
                 {
@@ -79,6 +93,14 @@ namespace _06_IdentityProject.Web.Controllers
                 }
             }
             return View(model);
+        }
+
+        [Authorize]
+        public IActionResult GetUserInfo()
+        {
+            var username = User.Identity.Name;
+            var role = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value;
+            return View();
         }
         public IActionResult Privacy()
         {
