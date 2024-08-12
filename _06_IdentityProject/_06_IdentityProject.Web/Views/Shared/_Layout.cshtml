@@ -23,7 +23,11 @@
                         @if(User != null && User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Home" asp-action="GetUserInfo">Kullanıcı Bilgileri</a>
+                                <a class="nav-link text-dark" asp-controller="User" asp-action="Index">Kullanıcı Bilgileri</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Role" asp-action="Index">Kullanıcı Bilgileri</a>
                             </li>
                         }
                         @if (User.Identity.IsAuthenticated)

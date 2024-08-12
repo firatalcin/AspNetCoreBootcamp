@@ -1,25 +1,24 @@
 ﻿@using _06_IdentityProject.Web.Entities
-@model List<AppUser>
+@model List<AppRole>
+
 @{
     ViewData["Title"] = "Index";
 }
 
-<a asp-action="Create" asp-controller="User" class="d-inline-block my-2">Yeni Kullanıcı Ekle</a>
+<a asp-action="Create" asp-controller="Role" class="d-inline-block my-2">Yeni Rol Ekle</a>
 <table class="table table-hovered table-bordered table-sm">
     <thead>
         <tr>
-            <th>Username</th>
-            <th>Gender</th>
-            <th>Email</th>
+            <th>Name</th>
+            <th>CreatedDate</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.UserName</td>
-                <td>@item.Gender</td>
-                <td>@item.Email</td>
+                <td>@item.Name</td>
+                <td>@item.CreatedDate</td>
             </tr>
         }
     </tbody>
