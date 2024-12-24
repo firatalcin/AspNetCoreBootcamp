@@ -18,7 +18,5 @@ namespace AccountService.Data.Entities
         public string LastName { get; set; }
         [BsonRepresentation(MongoDB.Bson.BsonType.String)]
         public string Username { get; set; }
-        [BsonRepresentation(MongoDB.Bson.BsonType.Int32)]
-        public int Point { get; set; }
     }
 }
