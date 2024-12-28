@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\SharedModule\SharedService\SharedService.csproj" />
     <ProjectReference Include="..\MarketService.Data\MarketService.Data.csproj" />
   </ItemGroup>
 

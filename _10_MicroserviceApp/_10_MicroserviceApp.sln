@@ -9,17 +9,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InvertoryModule", "Invertor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MarketModule", "MarketModule", "{A156F823-1764-4301-B6BF-9D16FF98F80D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountService.API", "AccountStructureModule\AccountService.API\AccountService.API.csproj", "{06065940-C0E6-481D-9CEC-A4D658859B05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountService.API", "AccountStructureModule\AccountService.API\AccountService.API.csproj", "{06065940-C0E6-481D-9CEC-A4D658859B05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountService.Data", "AccountStructureModule\AccountService.Data\AccountService.Data.csproj", "{5F2E3B9E-FF7A-44CF-9107-D87D303AF87F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountService.Data", "AccountStructureModule\AccountService.Data\AccountService.Data.csproj", "{5F2E3B9E-FF7A-44CF-9107-D87D303AF87F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvertoryService.API", "InvertoryModule\InvertoryService.API\InvertoryService.API.csproj", "{B7AA01F7-A9DB-4962-9C60-EC114845F840}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvertoryService.API", "InvertoryModule\InvertoryService.API\InvertoryService.API.csproj", "{B7AA01F7-A9DB-4962-9C60-EC114845F840}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryService.Data", "InvertoryModule\InventoryService.Data\InventoryService.Data.csproj", "{A35AE0BC-4406-4150-BE29-882CC1035BEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryService.Data", "InvertoryModule\InventoryService.Data\InventoryService.Data.csproj", "{A35AE0BC-4406-4150-BE29-882CC1035BEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketService.API", "MarketModule\MarketService.API\MarketService.API.csproj", "{06D3191C-358B-41FB-B2D2-274FD53DE71E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketService.API", "MarketModule\MarketService.API\MarketService.API.csproj", "{06D3191C-358B-41FB-B2D2-274FD53DE71E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketService.Data", "MarketModule\MarketService.Data\MarketService.Data.csproj", "{BAFE036E-A6E7-4171-AC0A-012D762E5C94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketService.Data", "MarketModule\MarketService.Data\MarketService.Data.csproj", "{BAFE036E-A6E7-4171-AC0A-012D762E5C94}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedModule", "SharedModule", "{5559F01F-6636-426C-B86D-BD7321AFC724}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedService", "SharedModule\SharedService\SharedService.csproj", "{9574C978-E282-44C8-BD4C-02EC42F04AB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,10 @@ Global
 		{BAFE036E-A6E7-4171-AC0A-012D762E5C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAFE036E-A6E7-4171-AC0A-012D762E5C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAFE036E-A6E7-4171-AC0A-012D762E5C94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9574C978-E282-44C8-BD4C-02EC42F04AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9574C978-E282-44C8-BD4C-02EC42F04AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9574C978-E282-44C8-BD4C-02EC42F04AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9574C978-E282-44C8-BD4C-02EC42F04AB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +70,7 @@ Global
 		{A35AE0BC-4406-4150-BE29-882CC1035BEF} = {5184B64A-9D03-4A18-958A-6288BA1D2976}
 		{06D3191C-358B-41FB-B2D2-274FD53DE71E} = {A156F823-1764-4301-B6BF-9D16FF98F80D}
 		{BAFE036E-A6E7-4171-AC0A-012D762E5C94} = {A156F823-1764-4301-B6BF-9D16FF98F80D}
+		{9574C978-E282-44C8-BD4C-02EC42F04AB4} = {5559F01F-6636-426C-B86D-BD7321AFC724}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50258BD6-8A38-47B9-9FD3-76E9E71BF3C3}
