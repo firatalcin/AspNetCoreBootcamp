@@ -1,0 +1,6 @@
+@model List<Course>
+
+    @foreach (var item in Model)
+    {
+       @await Html.PartialAsync("Partials/_CourseCardPartial", item)
+    }
