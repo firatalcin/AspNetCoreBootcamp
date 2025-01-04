@@ -32,9 +32,9 @@ public class HomeController :Controller
 
         return View(new ProductListViewModel {
             Products = products,
-            PageInfo = new PageInfo()
-            {
+            PageInfo = new PageInfo {
                 ItemsPerPage = pageSize,
+                CurrentPage = page,
                 TotalItems = _storeRepository.Products.Count()
             }
         });
